@@ -1,0 +1,48 @@
+/*
+    Autor: Aguinaldo Alves
+    Data: 02/04/2026
+    Obejetivo: Diferença ou Soma entre Dois Números.
+                Se A < B, calcule Y = B - A.
+                Se B < A, calcule Y = A - B.
+                Se forem iguais, calcule Y = A + B.
+                    Exemplo saida:
+                    Entrada: A=5, B=10 → Saída: Y=5
+                    Entrada: A=8, B=8 → Saída: Y=16
+*/
+
+// Declarando as bibliotecas do C
+#include <stdio.h>
+
+// Programa
+int main () {
+
+    // Declarando as variáveis
+    int numero1;
+    int numero2;
+    int resultado;
+
+    printf ("Digite um número inteiro positivo..................: ");
+    scanf ("%d", &numero1);
+    printf ("Digite um segundo número inteiro positivo..........: ");
+    scanf ("%d", &numero2);
+
+    // Verificando a primeira condição
+    if (numero1 < numero2) {
+        resultado = numero2 - numero1;
+        printf ("Numero %.d e menor que numero %.d, Resultado = %.d", numero1, numero2, resultado);
+    }
+
+    // Verificando a segundao condição
+    if (numero2 < numero1) {
+        resultado = numero2 - numero1;
+        printf ("Numero %.d e menor que numero %.d, Resultado = %.d", numero2, numero1, resultado);
+    }
+
+    // Verificando a terceira condição
+    if (numero1 == numero2) {
+        resultado = numero1 + numero2;
+        printf ("Numero %.d é igual ao numero %.d, Resultado = %.d", numero1, numero2, resultado);
+    }
+
+    return 0;
+}
