@@ -26,7 +26,7 @@ int main () {
         soma = soma + numero;
     }
 
-    printf ("A soma dos 15 números inteiros é: %d \n", soma);
+    printf ("A soma dos 15 numeros inteiros e: %d \n", soma);
 
 
     return 0;
