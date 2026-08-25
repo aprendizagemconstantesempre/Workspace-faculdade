@@ -11,7 +11,7 @@ Objetivo: menu simples com switch case
 #include <windows.h>
 
 // Declaração de variáveis
-// Definição Estruturas de Dados
+// Definição Estruturas de Dados  (o typedef é como se definissemos um apelido. struct é um tipo primitivo de dados)
 typedef struct {
     int cd_cliente;
     char nm_cliente[50];
@@ -122,20 +122,36 @@ int menu(int opcao){
     return opcao;
 }
 
-void opcao1() {
+void incluir() {
+    reg_cliente clie;
     system("cls");
     telabordas();
     telacliente ();
     gotoxy(33, 03);
     printf("INCLUSAO");
-    
+    gotoxy(28, 05);
+    scanf ("%d", &clie.cd_cliente);
+    gotoxy (28, 07);
+    fflush (stdin) ;
+    fgets(clie .nm_cliente, 50, stdin) ;
+    gotoxy (28, 9);
+    fflush (stdin);
+    fgets (clie.ds_endereco, 50, stdin);
+    gotoxy (28, 11);
+    scanf ("%d", &clie.nr_numero);
+    gotoxy (28, 13);
+    fflush (stdin);
+    fgets (clie.nr_documento, 20, stdin);
+    gotoxy (28, 15);
+    fflush (stdin);
+    fgets (clie.ds_cidade, 50, stdin);
     gotoxy(03, 23);
     printf("Pressione qualquer tecla para continuar...");
 
     getch();
 }
 
-void opcao2() {
+void alterar() {
     system("cls");
     telabordas();
     telacliente ();
@@ -148,7 +164,7 @@ void opcao2() {
     getch();
 }
 
-void opcao3() {
+void excluir() {
     system("cls");
     telabordas();
     telacliente ();
@@ -161,7 +177,7 @@ void opcao3() {
     getch();
 }
 
-void opcao4() {
+void consultar() {
     system("cls");
     telabordas();
     telacliente ();
@@ -174,38 +190,7 @@ void opcao4() {
     getch();
 }
 
-void sair() {
-    system("cls");
-
-    telabordas();
-
-    gotoxy(26, 12);
-    printf("Programa encerrado.\n");
-    
-    gotoxy(03, 23);
-    printf("Pressione qualquer tecla para continuar...");
-    getch();
-}
-
-void opcaoInvalida() {
-    system("cls");
-
-    telabordas();
-
-    gotoxy(26, 11);
-    printf("----------------------------\n");
-    gotoxy(26, 12);
-    printf("------ Opcao invalida ------\n");
-    gotoxy(26, 13);
-    printf("----------------------------\n");
-
-    gotoxy(03, 23);
-    printf("Pressione qualquer tecla para continuar...");
-
-    getch(); // Aguarda o usuário pressionar uma tecla antes de reiniciar o menu
-
-}
-
+// Programa principal
 int main() {
 
     int opcao;
@@ -217,25 +202,29 @@ int main() {
         
         switch (opcao) {
             case 1:
-                opcao1();
+                incluir();
                 break;
             case 2:
-                opcao2();
+                alterar();
                 break;
             case 3:
-                opcao3();
+                excluir();
                 break;
             case 4:
-                opcao4();
+                consultar();
                 break;
-            case 0:
-                sair();
+            case 5:
+                gotoxy(40,19);
+                printf("FINALIZAR O PROGRAMA \n");
                 break;
             default:
-                opcaoInvalida();
+                gotoxy(49, 19);
+                printf ("OPÇÃO INVALIDA \n");
+                break;
         }
+        getch() ;
+    } while (opcao != 5); 
 
-    } while (opcao != 0); 
-
+return 0;
 
 }
