@@ -10,6 +10,10 @@ Objetivo: menu simples com switch case
 #include <conio.h>
 #include <windows.h>
 
+// Definição de constantes
+#define INICIO_ARRANJO 1
+#define TAMANHO_MAXIMO 10
+
 // Declaração de variáveis
 // Definição Estruturas de Dados  (o typedef é como se definissemos um apelido. struct é um tipo primitivo de dados)
 typedef struct {
@@ -23,6 +27,13 @@ typedef struct {
     char dt_cadastro[19];
     char nr_telefone[15];
 } reg_cliente;
+
+// Definição Estrutura de Dados
+typedef struct {
+    reg_cliente dados[TAMANHO_MAXIMO];
+    int primeiro;
+    int ultimo;
+} tipo_lista;
 
 
 
@@ -122,31 +133,81 @@ int menu(int opcao){
     return opcao;
 }
 
-void incluir() {
+// Função pesquisar
+int pesquisa(int codigo) {
+    int x;
+    int falg = -1;
+
+    for (x = 0; x < L->ultimo; x++) {
+        if (L->dados[x] == codigo) {
+            retorn x;
+        }
+        retorn -1;
+    }
+}
+
+void incluir(tipo_lista * L) { // O asterisco é o ponteiro que aponta para um endereço
+    // Declaração de variáveis
     reg_cliente clie;
-    system("cls");
-    telabordas();
-    telacliente ();
-    gotoxy(33, 03);
-    printf("INCLUSAO");
-    gotoxy(28, 05);
-    scanf ("%d", &clie.cd_cliente);
-    gotoxy (28, 07);
-    fflush (stdin) ;
-    fgets(clie .nm_cliente, 50, stdin) ;
-    gotoxy (28, 9);
-    fflush (stdin);
-    fgets (clie.ds_endereco, 50, stdin);
-    gotoxy (28, 11);
-    scanf ("%d", &clie.nr_numero);
-    gotoxy (28, 13);
-    fflush (stdin);
-    fgets (clie.nr_documento, 20, stdin);
-    gotoxy (28, 15);
-    fflush (stdin);
-    fgets (clie.ds_cidade, 50, stdin);
-    gotoxy(03, 23);
-    printf("Pressione qualquer tecla para continuar...");
+    int resp;
+
+    do {
+        system("cls");
+        telabordas();
+        telacliente ();
+        gotoxy(33, 03);
+        printf("INCLUSAO");
+        gotoxy(28, 05);
+        scanf ("%d", &clie.cd_cliente);
+        gotoxy (28, 07);
+        fflush (stdin) ;
+        fgets(clie .nm_cliente, 50, stdin) ;
+        gotoxy (28, 9);
+        fflush (stdin);
+        fgets (clie.ds_endereco, 50, stdin);
+        gotoxy (28, 11);
+        scanf ("%d", &clie.nr_numero);
+        gotoxy (28, 13);
+        fflush (stdin);
+        fgets (clie.nr_documento, 20, stdin);
+        gotoxy (28, 15);
+        fflush (stdin);
+        fgets (clie.ds_cidade, 50, stdin);
+        gotoxy (28, 17);
+        fflush (stdin);
+        fgets (clie.ds_uf, 05, stdin);
+        gotoxy (28, 19);
+        fflush (stdin);
+        fgets (clie.dt_cadastro, 19, stdin);
+        gotoxy (28, 21);
+        fflush (stdin);
+        fgets (clie.nr_telefone, 15, stdin);
+        gotoxy(03, 23);
+        gotoxy (07, 23);
+
+        printf("Deseja gravar o cliente (1 = Sim; 2 = Não).: ");
+        scanf ("%d",&resp);
+
+        if (resp == 1) {
+            if (L-> ultimo >= TAMANHO_MAXIMO) {
+                gotoxy (07, 23);
+                printf ("Lista cheia...");
+                getch();
+
+            } else {
+                L->dados[L->ultimo] = clie;     // Eu me refico a um ponteiro com ->
+                L-> ultimo ++;
+
+            }
+        }
+
+        gotoxy (07, 23);
+        printf ("Deseja cadastrar outro (1 = Sim; 2 = Não). : ");
+        scanf ("%d", resp);
+
+    } while (resp == 1);
+    
+    
 
     getch();
 }
@@ -198,11 +259,17 @@ int main() {
     do {
         system("cls");
 
+        // Definição de Variáveis
         opcao = menu(opcao);
+        tipo_lista L;
+
+        // Inicialização de variáveis Lista
+        L.primeiro = 0;
+        L.ultimo = 0;
         
         switch (opcao) {
             case 1:
-                incluir();
+                incluir(&L);
                 break;
             case 2:
                 alterar();
