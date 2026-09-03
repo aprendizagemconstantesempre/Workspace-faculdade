@@ -16,7 +16,8 @@ Objetivo: menu simples com switch case
 
 // Declaração de variáveis
 // Definição Estruturas de Dados  (o typedef é como se definissemos um apelido. struct é um tipo primitivo de dados)
-typedef struct {
+typedef struct
+{
     int cd_cliente;
     char nm_cliente[50];
     char ds_endereco[50];
@@ -29,16 +30,16 @@ typedef struct {
 } reg_cliente;
 
 // Definição Estrutura de Dados
-typedef struct {
+typedef struct
+{
     reg_cliente dados[TAMANHO_MAXIMO];
     int primeiro;
     int ultimo;
 } tipo_lista;
 
-
-
 // Função para posicionar o cursor na tela
-void gotoxy(int x, int y) {
+void gotoxy(int x, int y)
+{
     COORD coord;
     coord.X = x;
     coord.Y = y;
@@ -46,7 +47,8 @@ void gotoxy(int x, int y) {
 }
 
 // Função para desenhar as bordas da tela
-void telabordas() {
+void telabordas()
+{
     system("cls");
 
     gotoxy(01, 01);
@@ -65,7 +67,8 @@ void telabordas() {
     gotoxy(01, 04);
     printf("+------------------------------------------------------------------------------+");
 
-    for (int i = 5; i <= 21; i++) {
+    for (int i = 5; i <= 21; i++)
+    {
         gotoxy(01, i);
         printf("|                                                                              |");
     }
@@ -77,11 +80,12 @@ void telabordas() {
     printf("|                                                                              |");
 
     gotoxy(01, 24);
-   printf("+------------------------------------------------------------------------------+");
+    printf("+------------------------------------------------------------------------------+");
 }
 
 // Função para exibir informações do cliente
-void telacliente () {
+void telacliente()
+{
     system("cls");
     telabordas();
 
@@ -105,117 +109,156 @@ void telacliente () {
     printf("8 - Telefone..........: ");
 }
 
-int menu(int opcao){
+int menu(int opcao)
+{
     telabordas();
 
     gotoxy(30, 9);
     printf("Menu:\n");
 
-        gotoxy(30, 11);
-        printf("1 - Inclusao\n");
-    
-        gotoxy(30, 12);
-        printf("2 - Alteracao\n");
+    gotoxy(30, 11);
+    printf("1 - Inclusao\n");
 
-        gotoxy(30, 13);
-        printf("3 - Exclusao\n");
+    gotoxy(30, 12);
+    printf("2 - Alteracao\n");
 
-        gotoxy(30, 14);
-        printf("4 - Consulta\n");
+    gotoxy(30, 13);
+    printf("3 - Exclusao\n");
 
-        gotoxy(30, 15);
-        printf("0 - Fechar Programa\n");
+    gotoxy(30, 14);
+    printf("4 - Consulta\n");
 
-        gotoxy(03, 23);
-        printf("Escolha uma opcao: ");
-        scanf("%d", &opcao);
+    gotoxy(30, 15);
+    printf("0 - Fechar Programa\n");
+
+    gotoxy(03, 23);
+    printf("Escolha uma opcao: ");
+    scanf("%d", &opcao);
 
     return opcao;
 }
 
-// Função pesquisar
-int pesquisa(int codigo) {
-    int x;
-    int falg = -1;
-
-    for (x = 0; x < L->ultimo; x++) {
-        if (L->dados[x] == codigo) {
-            retorn x;
-        }
-        retorn -1;
-    }
+// Função limpar mensgem
+void limpar_mensagem() {
+    gotoxy (07, 23);
+    printf ("                                                             ");
 }
 
-void incluir(tipo_lista * L) { // O asterisco é o ponteiro que aponta para um endereço
+
+// Função pesquisar
+int pesquisa(tipo_lista *L, int codigo)
+{
+    int x;
+
+    for (x = 0; x < L->ultimo; x++)
+    {
+        if (L->dados[x].cd_cliente == codigo)
+        {
+            return x;
+        }
+    }
+    return -1;
+}
+
+void incluir(tipo_lista *L)
+{ // O asterisco é o ponteiro que aponta para um endereço
     // Declaração de variáveis
     reg_cliente clie;
+    int result;
     int resp;
 
-    do {
-        system("cls");
-        telabordas();
-        telacliente ();
-        gotoxy(33, 03);
-        printf("INCLUSAO");
-        gotoxy(28, 05);
-        scanf ("%d", &clie.cd_cliente);
-        gotoxy (28, 07);
-        fflush (stdin) ;
-        fgets(clie .nm_cliente, 50, stdin) ;
-        gotoxy (28, 9);
-        fflush (stdin);
-        fgets (clie.ds_endereco, 50, stdin);
-        gotoxy (28, 11);
-        scanf ("%d", &clie.nr_numero);
-        gotoxy (28, 13);
-        fflush (stdin);
-        fgets (clie.nr_documento, 20, stdin);
-        gotoxy (28, 15);
-        fflush (stdin);
-        fgets (clie.ds_cidade, 50, stdin);
-        gotoxy (28, 17);
-        fflush (stdin);
-        fgets (clie.ds_uf, 05, stdin);
-        gotoxy (28, 19);
-        fflush (stdin);
-        fgets (clie.dt_cadastro, 19, stdin);
-        gotoxy (28, 21);
-        fflush (stdin);
-        fgets (clie.nr_telefone, 15, stdin);
-        gotoxy(03, 23);
-        gotoxy (07, 23);
+    do
+    {
+        do
+        {
+            system("cls");
+            telabordas();
+            telacliente();
+            gotoxy(33, 03);
+            printf("INCLUSAO");
 
-        printf("Deseja gravar o cliente (1 = Sim; 2 = Não).: ");
-        scanf ("%d",&resp);
+            gotoxy(07, 23);
+            printf("Digite 0 para sair...");
 
-        if (resp == 1) {
-            if (L-> ultimo >= TAMANHO_MAXIMO) {
-                gotoxy (07, 23);
-                printf ("Lista cheia...");
-                getch();
+            gotoxy(28, 05);
+            scanf("%d", &clie.cd_cliente);
 
-            } else {
-                L->dados[L->ultimo] = clie;     // Eu me refico a um ponteiro com ->
-                L-> ultimo ++;
+            // Pesquisando se o código do cliene já existe.
+            result = pesquisa(L, clie.cd_cliente);
 
+            if (result != -1)
+            {
+                gotoxy(07, 23);
+                printf("Código já cadastrado...");
+            }
+
+        } while ((result != -1) && (clie.cd_cliente != 0));
+
+        if (clie.cd_cliente != 0)
+        {
+
+            gotoxy(28, 07);
+            fflush(stdin);
+            fgets(clie.nm_cliente, 50, stdin);
+            gotoxy(28, 9);
+            fflush(stdin);
+            fgets(clie.ds_endereco, 50, stdin);
+            gotoxy(28, 11);
+            scanf("%d", &clie.nr_numero);
+            gotoxy(28, 13);
+            fflush(stdin);
+            fgets(clie.nr_documento, 20, stdin);
+            gotoxy(28, 15);
+            fflush(stdin);
+            fgets(clie.ds_cidade, 50, stdin);
+            gotoxy(28, 17);
+            fflush(stdin);
+            fgets(clie.ds_uf, 05, stdin);
+            gotoxy(28, 19);
+            fflush(stdin);
+            fgets(clie.dt_cadastro, 19, stdin);
+            gotoxy(28, 21);
+            fflush(stdin);
+            fgets(clie.nr_telefone, 15, stdin);
+            gotoxy(03, 23);
+
+            limpar_mensagem();
+
+            gotoxy(07, 23);
+            printf("Deseja gravar o cliente (1 = Sim; 2 = Nao).: ");
+            scanf("%d", &resp);
+
+            if (resp == 1)
+            {
+                if (L->ultimo >= TAMANHO_MAXIMO)
+                {
+                    gotoxy(07, 23);
+                    printf("Lista cheia...");
+                    getch();
+                }
+                else
+                {
+                    L->dados[L->ultimo] = clie; // Eu me refico a um ponteiro com ->
+                    L->ultimo++;
+                }
             }
         }
 
-        gotoxy (07, 23);
-        printf ("Deseja cadastrar outro (1 = Sim; 2 = Não). : ");
-        scanf ("%d", resp);
+        limpar_mensagem();
+        gotoxy(07, 23);
+        printf("Deseja cadastrar outro (1 = Sim; 2 = Nao). : ");
+        scanf("%d", &resp);
 
     } while (resp == 1);
-    
-    
 
     getch();
 }
 
-void alterar() {
+void alterar()
+{
     system("cls");
     telabordas();
-    telacliente ();
+    telacliente();
     gotoxy(31, 03);
     printf("ALTERACAO");
 
@@ -225,10 +268,11 @@ void alterar() {
     getch();
 }
 
-void excluir() {
+void excluir()
+{
     system("cls");
     telabordas();
-    telacliente ();
+    telacliente();
     gotoxy(31, 03);
     printf("EXCLUSAO");
 
@@ -238,25 +282,28 @@ void excluir() {
     getch();
 }
 
-void consultar() {
+void consultar()
+{
     system("cls");
     telabordas();
-    telacliente ();
+    telacliente();
     gotoxy(31, 03);
     printf("CONSULTA");
 
     gotoxy(03, 23);
     printf("Pressione qualquer tecla para continuar...");
-    
+
     getch();
 }
 
 // Programa principal
-int main() {
+int main()
+{
 
     int opcao;
 
-    do {
+    do
+    {
         system("cls");
 
         // Definição de Variáveis
@@ -266,32 +313,32 @@ int main() {
         // Inicialização de variáveis Lista
         L.primeiro = 0;
         L.ultimo = 0;
-        
-        switch (opcao) {
-            case 1:
-                incluir(&L);
-                break;
-            case 2:
-                alterar();
-                break;
-            case 3:
-                excluir();
-                break;
-            case 4:
-                consultar();
-                break;
-            case 5:
-                gotoxy(40,19);
-                printf("FINALIZAR O PROGRAMA \n");
-                break;
-            default:
-                gotoxy(49, 19);
-                printf ("OPÇÃO INVALIDA \n");
-                break;
+
+        switch (opcao)
+        {
+        case 1:
+            incluir(&L);
+            break;
+        case 2:
+            alterar();
+            break;
+        case 3:
+            excluir();
+            break;
+        case 4:
+            consultar();
+            break;
+        case 5:
+            gotoxy(03, 23);
+            printf("FINALIZAR O PROGRAMA \n");
+            break;
+        default:
+            gotoxy(03, 23);
+            printf("OPCAO INVALIDA \n");
+            break;
         }
-        getch() ;
-    } while (opcao != 5); 
 
-return 0;
+    } while (opcao != 0);
 
+    return 0;
 }
