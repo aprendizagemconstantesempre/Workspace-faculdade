@@ -48,7 +48,6 @@ int main () {
     scanf ("%d", &numero);
 
     // Verificando se o número digitado pelo usuário existe no vetor
-
     // Inicializando a variável achou
     achou = 0;
     posicao = 0;
