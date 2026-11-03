@@ -147,3 +147,12 @@ Falta o Aguinaldo testar a tela de inclusão e commitar.
   controllers (testado fora do IntelliJ). **Nada commitado:** o Aguinaldo faz os commits
   manualmente ao fim de cada fase (o commit que o Claude tinha feito foi desfeito). Pendente:
   rodar no IntelliJ, commitar a Fase 0 e combinar a divisão com o grupo. Aviso: os FXML declaram JavaFX 26 e o runtime é o 21.0.6.
+- (03/11) **Fase 1 (Model) implementada pelo Claude a pedido** e ainda sem commit (o Aguinaldo commita).
+  Pacote `model`: Cadastro (abstrata; temMesmoNome, getDetalhe, getMensagemEmUso, estaVinculadoA),
+  ListaCompra, Estabelecimento, Produto, UnidadeMedida, ItemLista (guarda ids), ValidacaoException
+  e Repositorio (singleton com D1–D4, regras RN, exclusão polimórfica). `util/Formatador` (R$ e quantidade).
+  Teste `src/test/java/.../TesteModel.java`: 52/52 OK, com os números do BDD (92,00 → 103,00 → 82,80).
+  Compila sem avisos. Próximo: Fase 2 (controllers de cadastro), Fase 4 (Gson/JSON).
+- (03/11) Navegação conferida e botões provisórios: `util/Mensagem` (informar, emDesenvolvimento).
+  Os 9 botões ainda sem função mostram "Função em desenvolvimento...". Teste clicando nos botões:
+  20/20 OK. Sem commit.
