@@ -77,3 +77,73 @@ Estrutura de Banco no 2º semestre, com exercícios em linguagem C.
 - Sem áudio/voz nas conversas com Claude — tudo é por texto.
 - Claude Code e claude.ai (Desktop/Web/celular) **não compartilham memória
   automaticamente** — este arquivo existe para suprir isso manualmente.
+
+## Atualização 2026-10-26 — Trabalho Final de Estrutura de Dados
+
+- Projeto: **Sistema de Controle Bancário** (Prof. Rodney), prazo 09/11/2026.
+  Contas em lista DUPLAMENTE encadeada, movimentações em lista SIMPLESMENTE
+  encadeada, gravação em disco, testes documentados e README.
+- Repositório próprio: https://github.com/aprendizagemconstantesempre/BancoGafanhotos
+  clonado em `G:\Meu Drive\Faculdade_Aguinaldo\Disciplinas 2 Semestre\Estrutura de Dados\2_Bimestre\BancoGafanhotos`.
+- Desenvolvimento faseado por tela (plano em `docs/plano_de_desenvolvimento.md`
+  do repo), layout no padrão do `menu02.C` / `Registro_Funcionarios.c`.
+- Fase 0 (estrutura de pastas, .gitignore, README) commitada localmente.
+- Pendente: decidir se o código será feito no modo parceiro de estudo ou
+  escrito pelo Claude.
+
+## Atualização 2026-10-27 — Regras do professor para o BancoGafanhotos
+
+Autores: Aguinaldo Alves e Gustavo Pereira.
+1. Uma função por arquivo `.c`, todos na mesma pasta (nenhum arquivo com duas funções).
+2. Cada arquivo com nome do autor, data e comentário sucinto do código.
+3. Arquivo `funcoes.c` junta todos os `.c`.
+4. Dados salvos no arquivo `BancoGafanhoto` dentro da pasta `output`.
+5. Transferência entre contas: antes de confirmar, mostrar o saldo das duas contas já considerando a transferência.
+6. Opção de estorno de lançamentos.
+7. Sempre pedir confirmação da transação.
+8. Seguir o plano de testes do PDF (o professor vai avaliar com ele).
+Listas: seguir o PDF do projeto (contas = dupla, movimentações = simples).
+Nenhum commit/push sem o Aguinaldo pedir.
+Decisões (2026-10-27): todos os `.c` na raiz do repo; `main.c` inclui `funcoes.c`
+(que também tem as structs/typedef); um único arquivo `output/BancoGafanhoto`;
+estorno = lançamento inverso; usar só os conceitos do `menu02.C` e do
+`Registro_Funcionarios.c`; comentários no infinitivo, curtos e humanizados (ex.: "Percorrer a lista até achar a conta"); explicar cada
+função para o Aguinaldo conseguir apresentar o código.
+Pasta oficial do projeto (2026-10-27): `C:\Users\aguin\Documents\BancoGafanhotos`
+(a cópia no Google Drive foi apagada). Criados `main.c`, `funcoes.c` (structs),
+`gotoxy.c`, `telabordas.c`, `output/`, `tests/`, `docs/`. Nada commitado ainda —
+o Aguinaldo faz os commits.
+Fase 1 (resto) + Fase 2 feitas pelo Claude a pedido (2026-10-27): rodapé
+(`limpar_mensagem`, `mensagem`, `perguntar`), leitura (`ler_texto`, `ler_opcao`,
+`ler_valor`, `ler_conta`), `tela_conta`, `menu`, `menu_cadastro`, `incluir_conta`
+e lista dupla (`inicializar_lista_conta`, `contar_contas`, `pesquisar_conta`,
+`buscar_posicao_conta`, `nova_conta`, `inserir_conta_inicio/final/posicao`,
+`liberar_contas`). Compila sem avisos; ponteiros testados nos dois sentidos.
+Falta o Aguinaldo testar a tela de inclusão e commitar.
+
+## Atualização 2026-11-02 — Trabalho Bimestral JavaFX (Paradigma de Programação)
+
+- Projeto: `2_Semestre/Paradigma_de_Programacao/Lista_Compras` (Lista de Compras,
+  JavaFX 21 + Scene Builder + POO). Prazo **09/11/2026 23:59** (mesmo dia do BancoGafanhotos).
+- Instruções do professor: `C:\Users\aguin\Downloads\Faculdade\Instruções_Tabalho_Bimestral.pdf`
+  (mínimo 3 telas: Cadastro, Consulta, Movimentação; passagem de dados entre telas;
+  herança; polimorfismo; MVC; documentação + apresentação). Exemplo do professor:
+  `ExemploJavaFx.zip` (Cliente + ClienteDAO/ClienteDAOImpl com ArrayList, NetBeans).
+- Pronto: 5 FXML (Menu, Cadastro Lista/Estabelecimento/Produto, Criar Lista), controllers
+  só com esqueleto, `Navegador.abrir`. `pom.xml` e `Main.java` alterados e sem commit.
+- Faltando: Model, herança/polimorfismo, tela de Consulta, passagem de objetos, movimentação.
+- Cronograma faseado em `Lista_Compras/docs/cronograma_entrega.md` (Fase 0 em 02/11 até
+  a entrega em 09/11).
+- (02/11, revisão) O sistema também atende a **Processo de Software e Eng. de Requisitos**:
+  `Downloads\Faculdade\Trabalho_Bimestral_DFD_e_BDD_v1.pdf` (RF001–RF018, NF001–NF006,
+  RN001–RN090, DFD D1–D4, histórias H01–H18). Grupo: Aguinaldo Alves, Gustavo Pereira,
+  Gustavo Miguel, João Pedro.
+- Decisão: **sem tela de Consulta nova**. A consulta fica embutida nas telas de cadastro
+  (RN010; o menu tem 5 opções fixas pela RN002); Criar Lista = Movimentação.
+- JSON (NF001, Gson) passou a ser obrigatório. Model: `Cadastro` abstrata → ListaCompra,
+  Estabelecimento e Produto; polimorfismo em `getDetalhe()`/`getMensagemEmUso()`; `Repositorio`
+  com as 4 listas = D1–D4. Cronograma revisado em `docs/cronograma_entrega.md`, com divisão por integrante.
+- (02/11) Fase 0 feita pelo Claude: o projeto compila sem avisos e as 5 telas carregam com seus
+  controllers (testado fora do IntelliJ). **Nada commitado:** o Aguinaldo faz os commits
+  manualmente ao fim de cada fase (o commit que o Claude tinha feito foi desfeito). Pendente:
+  rodar no IntelliJ, commitar a Fase 0 e combinar a divisão com o grupo. Aviso: os FXML declaram JavaFX 26 e o runtime é o 21.0.6.
