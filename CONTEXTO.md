@@ -156,3 +156,5 @@ Falta o Aguinaldo testar a tela de inclusão e commitar.
 - (03/11) Navegação conferida e botões provisórios: `util/Mensagem` (informar, emDesenvolvimento).
   Os 9 botões ainda sem função mostram "Função em desenvolvimento...". Teste clicando nos botões:
   20/20 OK. Sem commit.
+- (03/11) O Aguinaldo commitou e enviou a Fase 1 e a navegação no commit `3f62c1a` (main = origin/main).
+  Próximo, da parte dele na Fase 2: Navegador devolvendo o controller (botão "Montar") e Mensagem.confirmar.
