@@ -158,3 +158,8 @@ Falta o Aguinaldo testar a tela de inclusão e commitar.
   20/20 OK. Sem commit.
 - (03/11) O Aguinaldo commitou e enviou a Fase 1 e a navegação no commit `3f62c1a` (main = origin/main).
   Próximo, da parte dele na Fase 2: Navegador devolvendo o controller (botão "Montar") e Mensagem.confirmar.
+- (03/11) **Ajustes de tela da Fase 1 feitos pelo Claude a pedido** (ninguém do grupo tinha feito). Sem commit.
+  `util/BotoesLinha` (botões Editar/Excluir na linha, RN080) usado nas tabelas de Lista, Estabelecimento e
+  Criar Lista e nos cartões de Produto; coluna "DETALHES" em Lista; `img/produto_padrao.png` (RN040). Os
+  botões do rodapé saíram. Controllers tipados com o Model; os cliques continuam em `emDesenvolvimento()`.
+  Teste real das telas: 26/26 OK; TesteModel 52/52. Fase 1 concluída. Próximo: Fase 2.
