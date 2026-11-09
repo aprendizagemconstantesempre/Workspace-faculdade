@@ -163,3 +163,14 @@ Falta o Aguinaldo testar a tela de inclusão e commitar.
   Criar Lista e nos cartões de Produto; coluna "DETALHES" em Lista; `img/produto_padrao.png` (RN040). Os
   botões do rodapé saíram. Controllers tipados com o Model; os cliques continuam em `emDesenvolvimento()`.
   Teste real das telas: 26/26 OK; TesteModel 52/52. Fase 1 concluída. Próximo: Fase 2.
+- (09/11) **Fases 2, 3 e 4 do Lista de Compras implementadas pelo Claude a pedido** ("implemente o que
+  ainda falta"). Sem commit. Controllers completos (cadastros com editar/excluir/confirmação/contador,
+  Criar Lista com totais, edição e exclusão de item), `ExclusaoCadastro` (exclusão polimórfica),
+  botão "Montar" (Navegador devolve o controller → `setListaSelecionada`), `model/Persistencia` (Gson,
+  `dados/lista_compras.json`), Sair com confirmação. TesteModel 52/52 e teste das telas 52/52.
+  Falta: conferir as mensagens com o PDF do BDD (não estava mais em Downloads\Faculdade), documento e apresentação.
+- (09/11) **Fases 5 e 6 concluídas pelo Claude a pedido.** Mensagens conferidas com o PDF do BDD; ajustes:
+  relação vazia (RN012), contadores "N listas cadastradas", aviso da H12 c2, gravar e avisar cadastro em
+  andamento ao sair (`util/Encerramento`), foto por link (RN088). Novo teste `src/test/.../TesteTelasBDD.java`
+  segue H01–H18: 91/91 OK; TesteModel 52/52. Documento `Lista_Compras/docs/Documentacao_Java.pdf` (9 páginas,
+  fonte HTML ao lado). Falta: ensaio, commit (o Aguinaldo faz) e entrega até 23:59.
